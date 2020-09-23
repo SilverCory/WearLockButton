@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Wear Lock Button</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hey! Grant permissions and then hold the key for 500 milliseconds or more to lock!</string>
+    <string name="accessibility_service_description">Detect key presses so a long press on button (stem one) will lock the watch.</string>
+</resources>
