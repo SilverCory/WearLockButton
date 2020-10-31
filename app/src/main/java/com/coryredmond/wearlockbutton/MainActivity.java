@@ -1,48 +1,52 @@
 package com.coryredmond.wearlockbutton;
 
-import android.app.admin.DevicePolicyManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.wearable.activity.WearableActivity;
-import android.support.wearable.input.WearableButtons;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.widget.TextView;
+import android.view.View;
 
-public class MainActivity extends WearableActivity {
+import androidx.appcompat.app.AppCompatActivity;
 
-    private TextView mTextView;
-    private DevicePolicyManager deviceManger;
+import com.coryredmond.wearlockbutton.settings.SettingsFragment;
+
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        deviceManger = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        checkAccessibilityPermission();
+        findViewById(R.id.permissionButton).setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startupScreen();
+            }
+        });
+
+        startupScreen();
     }
 
-    public boolean checkAccessibilityPermission() {
-        int accessEnabled=0;
+    public void startupScreen() {
+        checkAccessibilityPermission();
+
+        setContentView(R.layout.activity_settings);
+        SettingsFragment settingsFragment = new SettingsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.settingsFrameLayout, settingsFragment).commit();
+    }
+
+    public void checkAccessibilityPermission() {
+        int accessEnabled = 0;
         try {
-            accessEnabled = Settings.Secure.getInt(this.getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED);
+            accessEnabled = Settings.Secure.getInt(getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED);
         } catch (Settings.SettingNotFoundException e) {
             e.printStackTrace();
         }
-        if (accessEnabled==0) {
+
+        if (accessEnabled == 0) {
             /** if not construct intent to request permission */
             Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             /** request permission via start activity for result */
             startActivity(intent);
-            return false;
-        } else {
-            return true;
         }
     }
-
 }

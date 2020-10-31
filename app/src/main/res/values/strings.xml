@@ -6,4 +6,5 @@
     -->
     <string name="hello_world">Hey! Grant permissions and then hold the key for 500 milliseconds or more to lock!</string>
     <string name="accessibility_service_description">Detect key presses so a long press on button (stem one) will lock the watch.</string>
+    <string name="permcheck">Grant Permission</string>
 </resources>
