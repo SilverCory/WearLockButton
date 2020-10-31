@@ -22,7 +22,7 @@ There is no current method of detecting key press events in the background witho
 ---
 
 TODO:
-- [ ] Allow configuration of which multi-function button to use.
-- [ ] Allow configuration of min and max button press time.
-- [ ] Pretty permission page.
+- [x] Allow configuration of which multi-function button to use.
+- [x] Allow configuration of min and max button press time.
+- [ ] **Pretty** permission page. Looks like PreferenceFragmentCompat doesn't play well with WearOS?
 - [ ] Meme icon.
